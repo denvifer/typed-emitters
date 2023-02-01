@@ -77,7 +77,10 @@ You can extend EventEmitterBase or EventsEmitterBase and implement a custom emit
 ```typescript
 import { CombinedEmitterBase } from 'typed-emitters';
 
-export class CustomEmitter<TMessage, TError> extends CombinedEmitterBase<{ 'message': TMessage, 'error': TError }> {
+export class CustomEmitter<TMessage, TError> extends CombinedEmitterBase<{
+  'message': TMessage,
+  'error': TError,
+}> {
   emitMessage(message: TMessage): void {
     this.emitEvent('message', data);
   }
