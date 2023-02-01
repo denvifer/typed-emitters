@@ -47,5 +47,9 @@
     "emitter",
     "event-emitter",
     "typed"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DenVifer/typed-emitters"
+  }
 }
