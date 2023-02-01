@@ -39,7 +39,7 @@
     "tsup": "^6.5.0",
     "typescript": "^4.9.5"
   },
-  "author": "Denis Volchkov",
+  "author": "<d.vifer@gmail.com>",
   "license": "MIT",
   "description": "A simple and convenient event emitter with a separate interface for consumers.",
   "keywords": [
