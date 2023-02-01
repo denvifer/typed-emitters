@@ -15,11 +15,10 @@ npm install typed-emitters
 ```typescript
 import { EventEmitter } from 'typed-emitters'
 
-// Save the emitter in a private field
+// Create emitter
 private eventEmitter = new EventEmitter<string>();
-// Save the public interface in a public field
+// Share the public interface
 public event = this.eventEmitter.publicInterface;
-// If you don't need such a control, you can use the emitter for both emitting and subscribing
 
 // Emit event
 this.eventEmitter.emit('Test string'); // Type checking
@@ -34,11 +33,10 @@ provider.event.addListener(e => { console.log(e.data); });
 ```typescript
 import { EventsEmitter } from 'typed-emitters'
 
-// Save the emitter in a private field
+// Create emitter
 private eventsEmitter = new EventsEmitter<{ 'type1': string, 'type2' number }>();
-// Save the public interface in a public field
+// Share the public interface
 public events = this.eventsEmitter.publicInterface;
-// If you don't need such a control, you can use the emitter for both emitting and subscribing
 
 // Emit events
 this.eventsEmitter.emit('type1', 'Test string'); // Type checking
