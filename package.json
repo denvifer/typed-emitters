@@ -1,6 +1,6 @@
 {
   "name": "typed-emitters",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "test": "jest",
     "typecheck": "npx tsc",
@@ -10,11 +10,19 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.ts": ["npm run prettier", "npm run lint"]
+    "*.ts": [
+      "npm run prettier",
+      "npm run lint"
+    ]
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "LICENSE", "README.md", "package.json"],
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
