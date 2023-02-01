@@ -20,7 +20,7 @@ public event = this.eventEmitter.publicInterface;
 this.eventEmitter.emit('Test string'); // Type checking
 
 // Consumer has access to the public interface only and can't emit events
-provider.event.addListener(e => { console.log(e.data); });
+event.addListener(e => { console.log(e.data); });
 // The type of the e.data is a string
 ```
 
@@ -37,10 +37,31 @@ this.eventsEmitter.emit('type1', 'Test string'); // Type checking
 this.eventsEmitter.emit('type2', 1); // Type checking
 
 // Consumer has access to the public interface only and can't emit events
-provider.events.addListener('type1', e => { console.log(event.data); });
+events.addListener('type1', e => { console.log(event.data); });
 // The type of the e.data is a string
-provider.events.addListener('type2', e => { console.log(event.data); });
+events.addListener('type2', e => { console.log(event.data); });
 // The type of the e.data is a number
 ```
 
+## Unsubscribing
 
+```typescript
+// Option 1
+event.removeListener(yourListener);
+
+// Option 2
+const disposer = event.addListener(e => { console.log(e.data); });
+disposer();
+```
+
+## Extending base emitters
+You can extend EventEmitterBase or EventsEmitterBase and implement a custom version, for example, working with another Event implementation.
+
+```typescript
+import { EventEmitterBase } from 'typed-emitters';
+import { CustomEvent } from './custom-event';
+
+export class CustomEventEmitter<TData> extends EventEmitterBase<CustomEvent<TData>> {
+// ...
+}
+```
