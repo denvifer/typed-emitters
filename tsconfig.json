@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "skipLibCheck": true,
+      "target": "es2015",
+      "noEmit": true
+    },
+    "include": [
+      "src/**/*"
+    ],
+    "exclude": ["node_modules", "**/*.test.ts"]
+  }
