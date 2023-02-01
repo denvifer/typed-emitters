@@ -1,6 +1,6 @@
 ![typed-emitters | Simple and convenient event emitters with separate interfaces for consumers.](https://raw.githubusercontent.com/denvifer/typed-emitters/master/docs/image.png)
 
-100% Typescript, no deps.
+100% TypeScript, no deps.
 
 ## Install
 
