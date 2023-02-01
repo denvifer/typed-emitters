@@ -70,7 +70,7 @@ disposer();
 
 ## Extending base emitters
 
-You can extend EventEmitterBase or EventsEmitterBase and implement a custom emitter, see the examples below.
+You can extend EventEmitterBase or CombinedEmitterBase to implement a custom emitter, see the examples below.
 
 ### Emitting messages and errors
 
