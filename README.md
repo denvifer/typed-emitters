@@ -1,6 +1,4 @@
-# typed-emitters
-
-Simple and convenient event emitters with separate interfaces for consumers.
+![typed-emitters | Simple and convenient event emitters with separate interfaces for consumers.](https://raw.githubusercontent.com/denvifer/typed-emitters/master/docs/image.png)
 
 100% Typescript, no deps.
 
