@@ -41,11 +41,12 @@
   },
   "author": "<d.vifer@gmail.com>",
   "license": "MIT",
-  "description": "A simple and convenient event emitter with a separate interface for consumers.",
+  "description": "Simple and convenient event emitters with separate interfaces for consumers.",
   "keywords": [
+    "event-emitter",
     "events",
     "emitter",
-    "event-emitter",
+    "typescript",
     "typed"
   ],
   "repository": {
