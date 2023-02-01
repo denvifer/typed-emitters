@@ -25,7 +25,7 @@ this.emitter.emit('Test string'); // Type checking
 ### Consumer
 
 ```typescript
-// Consumer has access to the public interface only and can't emit events
+// Consumer has access only to the public interface (can listen but not emit)
 
 // The type of the data is a string
 event.addListener(data => { console.log(data); });
@@ -49,7 +49,7 @@ this.emitter.emit('type2', 1); // Type checking
 ### Consumer
 
 ```typescript
-// Consumer has access to the public interface only and can't emit events
+// Consumer has access only to the public interface (can listen but not emit)
 
 // The type of the data is a string
 events.addListener('type1', data => { console.log(data); });
