@@ -1,6 +1,6 @@
 {
   "name": "typed-emitters",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "scripts": {
     "test": "jest",
     "typecheck": "npx tsc",
