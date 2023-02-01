@@ -13,12 +13,10 @@ npm install typed-emitters
 ```typescript
 import { EventEmitter } from 'typed-emitters';
 
-// Create emitter
 private eventEmitter = new EventEmitter<string>();
 // Share the public interface
 public event = this.eventEmitter.publicInterface;
 
-// Emit event
 this.eventEmitter.emit('Test string'); // Type checking
 
 // Consumer has access to the public interface only and can't emit events
@@ -31,12 +29,10 @@ provider.event.addListener(e => { console.log(e.data); });
 ```typescript
 import { EventsEmitter } from 'typed-emitters';
 
-// Create emitter
 private eventsEmitter = new EventsEmitter<{ 'type1': string, 'type2' number }>();
 // Share the public interface
 public events = this.eventsEmitter.publicInterface;
 
-// Emit events
 this.eventsEmitter.emit('type1', 'Test string'); // Type checking
 this.eventsEmitter.emit('type2', 1); // Type checking
 
