@@ -10,6 +10,7 @@ npm install typed-emitters
 
 ## Single-event emitter
 
+### Provider
 ```typescript
 import { EventEmitter } from 'typed-emitters';
 
@@ -18,7 +19,10 @@ private eventEmitter = new EventEmitter<string>();
 public event = this.eventEmitter.publicInterface;
 
 this.eventEmitter.emit('Test string'); // Type checking
+```
 
+### Consumer
+```typescript
 // Consumer has access to the public interface only and can't emit events
 event.addListener(e => { console.log(e.data); });
 // The type of the e.data is a string
@@ -26,6 +30,7 @@ event.addListener(e => { console.log(e.data); });
 
 ## Multi-event emitter
 
+### Provider
 ```typescript
 import { EventsEmitter } from 'typed-emitters';
 
@@ -35,7 +40,10 @@ public events = this.eventsEmitter.publicInterface;
 
 this.eventsEmitter.emit('type1', 'Test string'); // Type checking
 this.eventsEmitter.emit('type2', 1); // Type checking
+```
 
+### Consumer
+```typescript
 // Consumer has access to the public interface only and can't emit events
 events.addListener('type1', e => { console.log(event.data); });
 // The type of the e.data is a string
