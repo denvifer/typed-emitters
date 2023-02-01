@@ -13,7 +13,7 @@ npm install typed-emitters
 ## Single-event emitter
 
 ```typescript
-import { EventEmitter } from 'typed-emitters'
+import { EventEmitter } from 'typed-emitters';
 
 // Create emitter
 private eventEmitter = new EventEmitter<string>();
@@ -31,7 +31,7 @@ provider.event.addListener(e => { console.log(e.data); });
 ## Multi-event emitter
 
 ```typescript
-import { EventsEmitter } from 'typed-emitters'
+import { EventsEmitter } from 'typed-emitters';
 
 // Create emitter
 private eventsEmitter = new EventsEmitter<{ 'type1': string, 'type2' number }>();

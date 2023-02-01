@@ -8,7 +8,7 @@ describe("EventEmitter", () => {
     eventEmitter.addListener(listener);
 
     const eventData = 1;
-    it("calles a listener", () => {
+    it("calls a listener", () => {
         eventEmitter.emit(eventData);
         expect(listener).toBeCalledWith(new Event(eventData));
     });

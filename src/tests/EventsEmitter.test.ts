@@ -19,13 +19,13 @@ describe("EventsEmitter", () => {
     eventsEmitter.addListener(Events.Type2, listener);
 
     const event1Data = 1;
-    it("calles a listener of the first event type", () => {
+    it("calls a listener of the first event type", () => {
         eventsEmitter.emit(Events.Type1, event1Data);
         expect(listener).toBeCalledWith(new Event(event1Data));
     });
 
     const event2Data = "Test string";
-    it("calles a listener of the second event type", () => {
+    it("calls a listener of the second event type", () => {
         eventsEmitter.emit(Events.Type2, event2Data);
         expect(listener).toBeCalledWith(new Event(event2Data));
     });
