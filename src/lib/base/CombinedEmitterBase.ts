@@ -1,6 +1,6 @@
 import { removeFromArray } from "../utils/removeFromArray";
 
-export class EventsEmitterBase<
+export class CombinedEmitterBase<
     TDataTypesIndex extends Record<string | number, unknown>,
     TEventTypesIndex extends { [key in keyof TDataTypesIndex]: unknown }
 > {
@@ -62,7 +62,7 @@ export class EventsEmitterBase<
     }
 }
 
-export type EventsEmitterBasePublicInterface<
+export type CombinedEmitterBasePublicInterface<
     TDataTypesIndex extends Record<string | number, unknown>,
     TEventTypesIndex extends { [key in keyof TDataTypesIndex]: unknown }
-> = EventsEmitterBase<TDataTypesIndex, TEventTypesIndex>["publicInterface"];
+> = CombinedEmitterBase<TDataTypesIndex, TEventTypesIndex>["publicInterface"];

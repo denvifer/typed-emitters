@@ -1,9 +1,8 @@
-import { Event } from "./Event";
 import { EventEmitterBase } from "./base/EventEmitterBase";
 
-export class EventEmitter<TData> extends EventEmitterBase<Event<TData>> {
+export class EventEmitter<TData> extends EventEmitterBase<TData> {
     emit(data: TData): void {
-        this.emitEvent(new Event(data));
+        this.emitEvent(data);
     }
 }
 

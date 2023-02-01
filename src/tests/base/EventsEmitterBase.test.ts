@@ -1,35 +1,35 @@
-import { EventsEmitterBase } from "../../lib/base/EventsEmitterBase";
+import { CombinedEmitterBase } from "../../lib/base/CombinedEmitterBase";
 
-describe("EventsEmitterBase", () => {
+describe("CombinedEmitterBase", () => {
     enum Events {
         Type1,
         Type2,
     }
 
-    const eventsEmitterBase = new EventsEmitterBase();
+    const emitterBase = new CombinedEmitterBase();
     const listener = jest.fn();
 
     it("saves a listener of the first event type", () => {
-        eventsEmitterBase.addListener(Events.Type1, listener);
-        expect(eventsEmitterBase.hasListeners(Events.Type1)).toBe(true);
-        expect(eventsEmitterBase.hasListeners(Events.Type2)).toBe(false);
+        emitterBase.addListener(Events.Type1, listener);
+        expect(emitterBase.hasListeners(Events.Type1)).toBe(true);
+        expect(emitterBase.hasListeners(Events.Type2)).toBe(false);
     });
 
     it("saves a listener of the second event type", () => {
-        eventsEmitterBase.addListener(Events.Type2, listener);
-        expect(eventsEmitterBase.hasListeners(Events.Type1)).toBe(true);
-        expect(eventsEmitterBase.hasListeners(Events.Type2)).toBe(true);
+        emitterBase.addListener(Events.Type2, listener);
+        expect(emitterBase.hasListeners(Events.Type1)).toBe(true);
+        expect(emitterBase.hasListeners(Events.Type2)).toBe(true);
     });
 
     it("removes the listener of the second event type", () => {
-        eventsEmitterBase.removeListener(Events.Type2, listener);
-        expect(eventsEmitterBase.hasListeners(Events.Type1)).toBe(true);
-        expect(eventsEmitterBase.hasListeners(Events.Type2)).toBe(false);
+        emitterBase.removeListener(Events.Type2, listener);
+        expect(emitterBase.hasListeners(Events.Type1)).toBe(true);
+        expect(emitterBase.hasListeners(Events.Type2)).toBe(false);
     });
 
     it("saves the listener of the first event type", () => {
-        eventsEmitterBase.removeListener(Events.Type1, listener);
-        expect(eventsEmitterBase.hasListeners(Events.Type1)).toBe(false);
-        expect(eventsEmitterBase.hasListeners(Events.Type2)).toBe(false);
+        emitterBase.removeListener(Events.Type1, listener);
+        expect(emitterBase.hasListeners(Events.Type1)).toBe(false);
+        expect(emitterBase.hasListeners(Events.Type2)).toBe(false);
     });
 });

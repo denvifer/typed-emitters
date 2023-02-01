@@ -1,4 +1,4 @@
-![typed-emitters | Simple and convenient event emitters with separate interfaces for consumers.](https://raw.githubusercontent.com/denvifer/typed-emitters/master/docs/image.png)
+ ![typed-emitters | Simple and convenient event emitters with separate interfaces for consumers.](https://raw.githubusercontent.com/denvifer/typed-emitters/master/docs/image.png)
 
 100% TypeScript, no deps.
 
@@ -11,44 +11,50 @@ npm install typed-emitters
 ## Single-event emitter
 
 ### Provider
+
 ```typescript
 import { EventEmitter } from 'typed-emitters';
 
-private eventEmitter = new EventEmitter<string>();
+private emitter = new EventEmitter<string>();
 // Share the public interface
-public event = this.eventEmitter.publicInterface;
+public event = this.emitter.publicInterface;
 
-this.eventEmitter.emit('Test string'); // Type checking
+this.emitter.emit('Test string'); // Type checking
 ```
 
 ### Consumer
+
 ```typescript
 // Consumer has access to the public interface only and can't emit events
-event.addListener(e => { console.log(e.data); });
-// The type of the e.data is a string
+
+// The type of the data is a string
+event.addListener(data => { console.log(data); });
 ```
 
 ## Multi-event emitter
 
 ### Provider
+
 ```typescript
-import { EventsEmitter } from 'typed-emitters';
+import { CombinedEmitter } from 'typed-emitters';
 
-private eventsEmitter = new EventsEmitter<{ 'type1': string, 'type2' number }>();
+private emitter = new CombinedEmitter<{ 'type1': string, 'type2' number }>();
 // Share the public interface
-public events = this.eventsEmitter.publicInterface;
+public events = this.emitter.publicInterface;
 
-this.eventsEmitter.emit('type1', 'Test string'); // Type checking
-this.eventsEmitter.emit('type2', 1); // Type checking
+this.emitter.emit('type1', 'Test string'); // Type checking
+this.emitter.emit('type2', 1); // Type checking
 ```
 
 ### Consumer
+
 ```typescript
 // Consumer has access to the public interface only and can't emit events
-events.addListener('type1', e => { console.log(event.data); });
-// The type of the e.data is a string
-events.addListener('type2', e => { console.log(event.data); });
-// The type of the e.data is a number
+
+// The type of the data is a string
+events.addListener('type1', data => { console.log(data); });
+// The type of the data is a number
+events.addListener('type2', data => { console.log(data); });
 ```
 
 ## Unsubscribing
@@ -58,18 +64,40 @@ events.addListener('type2', e => { console.log(event.data); });
 event.removeListener(yourListener);
 
 // Option 2
-const disposer = event.addListener(e => { console.log(e.data); });
+const disposer = event.addListener(data => { console.log(data); });
 disposer();
 ```
 
 ## Extending base emitters
-You can extend EventEmitterBase or EventsEmitterBase and implement a custom version, for example, working with another Event implementation.
+
+You can extend EventEmitterBase or EventsEmitterBase and implement a custom emitter, see the examples below.
+
+### Emitting messages and errors
+
+```typescript
+import { CombinedEmitterBase } from 'typed-emitters';
+
+export class CustomEmitter<TMessage, TError> extends CombinedEmitterBase<{ 'message': TMessage, 'error': TError }> {
+  emitMessage(message: TMessage): void {
+    this.emitEvent('message', data);
+  }
+  emitError(error: TError): void {
+    this.emitEvent('error', error);
+  }
+}
+```
+
+### Using a custom event wrapper
 
 ```typescript
 import { EventEmitterBase } from 'typed-emitters';
 import { CustomEvent } from './custom-event';
 
-export class CustomEventEmitter<TData> extends EventEmitterBase<CustomEvent<TData>> {
-// ...
+export class CustomEmitter<TData> extends EventEmitterBase<CustomEvent<TData>> {
+  emit(data: TData): void {
+    this.emitEvent(new CustomEvent(data));
+  }
 }
 ```
+
+
