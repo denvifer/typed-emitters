@@ -27,7 +27,7 @@ describe("MultiEventEmitterBase", () => {
         expect(emitterBase.hasListeners(Events.Type2)).toBe(false);
     });
 
-    it("saves the listener of the first event type", () => {
+    it("removes the listener of the first event type", () => {
         emitterBase.removeListener(Events.Type1, listener);
         expect(emitterBase.hasListeners(Events.Type1)).toBe(false);
         expect(emitterBase.hasListeners(Events.Type2)).toBe(false);
