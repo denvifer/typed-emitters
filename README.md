@@ -1,4 +1,14 @@
  ![typed-emitters | Simple and convenient event emitters with separate interfaces for consumers.](https://raw.githubusercontent.com/denvifer/typed-emitters/master/docs/image.png)
+ 
+<div align="center">
+
+![npm downloads](https://img.shields.io/npm/dw/typed-emitters)
+![bundlephobia min](https://img.shields.io/bundlephobia/min/typed-emitters)
+![bundlephobia minzip](https://img.shields.io/bundlephobia/minzip/typed-emitters)
+![license](https://img.shields.io/github/license/denvifer/typed-emitters)
+![version](https://img.shields.io/github/package-json/v/denvifer/typed-emitters)
+
+</div>
 
 100% TypeScript, no deps.
 
