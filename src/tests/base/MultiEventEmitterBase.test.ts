@@ -1,12 +1,12 @@
-import { CombinedEmitterBase } from "../../lib/base/CombinedEmitterBase";
+import { MultiEventEmitterBase } from "../../lib/base/MultiEventEmitterBase";
 
-describe("CombinedEmitterBase", () => {
+describe("MultiEventEmitterBase", () => {
     enum Events {
         Type1,
         Type2,
     }
 
-    const emitterBase = new CombinedEmitterBase();
+    const emitterBase = new MultiEventEmitterBase();
     const listener = jest.fn();
 
     it("saves a listener of the first event type", () => {

@@ -1,9 +1,9 @@
 export { EventEmitter } from "./EventEmitter";
 export { EventEmitterBase } from "./base/EventEmitterBase";
-export { CombinedEmitter } from "./CombinedEmitter";
-export { CombinedEmitterBase } from "./base/CombinedEmitterBase";
+export { MultiEventEmitter } from "./MultiEventEmitter";
+export { MultiEventEmitterBase } from "./base/MultiEventEmitterBase";
 
-export type { EventEmitterPublicInterface } from "./EventEmitter";
-export type { EventEmitterBasePublicInterface } from "./base/EventEmitterBase";
-export type { CombinedEmitterPublicInterface } from "./CombinedEmitter";
-export type { CombinedEmitterBasePublicInterface } from "./base/CombinedEmitterBase";
+export type { EventInterface } from "./EventEmitter";
+export type { EventInterfaceBase } from "./base/EventEmitterBase";
+export type { MultiEventInterface } from "./MultiEventEmitter";
+export type { MultiEventInterfaceBase } from "./base/MultiEventEmitterBase";

@@ -36,9 +36,9 @@ event.addListener(data => { console.log(data); });
 ### Provider
 
 ```typescript
-import { CombinedEmitter } from 'typed-emitters';
+import { MultiEventEmitter } from 'typed-emitters';
 
-private emitter = new CombinedEmitter<{ 'type1': string, 'type2' number }>();
+private emitter = new MultiEventEmitter<{ 'type1': string, 'type2' number }>();
 // Share the public interface
 public events = this.emitter.publicInterface;
 
@@ -70,14 +70,14 @@ disposer();
 
 ## Extending base emitters
 
-You can extend EventEmitterBase or CombinedEmitterBase to implement a custom emitter, see the examples below.
+You can extend EventEmitterBase or MultiEventEmitterBase to implement a custom emitter, see the examples below.
 
 ### Emitting messages and errors
 
 ```typescript
-import { CombinedEmitterBase } from 'typed-emitters';
+import { MultiEventEmitterBase } from 'typed-emitters';
 
-export class CustomEmitter<TMessage, TError> extends CombinedEmitterBase<{
+export class CustomEmitter<TMessage, TError> extends MultiEventEmitterBase<{
   'message': TMessage,
   'error': TError,
 }> {

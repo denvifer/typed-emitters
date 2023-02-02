@@ -1,8 +1,8 @@
-import { CombinedEmitterBase } from "./base/CombinedEmitterBase";
+import { MultiEventEmitterBase } from "./base/MultiEventEmitterBase";
 
-export class CombinedEmitter<
+export class MultiEventEmitter<
     TDataTypesIndex extends Record<string | number, unknown>
-> extends CombinedEmitterBase<
+> extends MultiEventEmitterBase<
     TDataTypesIndex,
     { [key in keyof TDataTypesIndex]: TDataTypesIndex[key] }
 > {
@@ -14,6 +14,6 @@ export class CombinedEmitter<
     }
 }
 
-export type CombinedEmitterPublicInterface<
+export type MultiEventInterface<
     TDataTypesIndex extends Record<string | number, unknown>
-> = CombinedEmitter<TDataTypesIndex>["publicInterface"];
+> = MultiEventEmitter<TDataTypesIndex>["publicInterface"];

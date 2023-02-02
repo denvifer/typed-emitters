@@ -35,5 +35,5 @@ export class EventEmitterBase<TEvent> {
     }
 }
 
-export type EventEmitterBasePublicInterface<TEvent> =
+export type EventInterfaceBase<TEvent> =
     EventEmitterBase<TEvent>["publicInterface"];

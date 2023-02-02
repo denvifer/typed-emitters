@@ -1,6 +1,6 @@
-import { CombinedEmitter } from "../lib/CombinedEmitter";
+import { MultiEventEmitter } from "../lib/MultiEventEmitter";
 
-describe("CombinedEmitter", () => {
+describe("MultiEventEmitter", () => {
     enum Events {
         Type1,
         Type2,
@@ -11,7 +11,7 @@ describe("CombinedEmitter", () => {
         [Events.Type2]: string;
     };
 
-    const emitter = new CombinedEmitter<EventDataTypes>();
+    const emitter = new MultiEventEmitter<EventDataTypes>();
 
     const listener = jest.fn();
     emitter.addListener(Events.Type1, listener);

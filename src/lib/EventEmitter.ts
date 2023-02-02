@@ -6,5 +6,4 @@ export class EventEmitter<TData> extends EventEmitterBase<TData> {
     }
 }
 
-export type EventEmitterPublicInterface<TData> =
-    EventEmitter<TData>["publicInterface"];
+export type EventInterface<TData> = EventEmitter<TData>["publicInterface"];
