@@ -71,6 +71,7 @@ this.emitter.emit('type2', 1); // Type checking
 
 // The type of the data is a string
 events.addListener('type1', data => { console.log(data); });
+
 // The type of the data is a number
 events.addListener('type2', data => { console.log(data); });
 ```
