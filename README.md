@@ -101,7 +101,7 @@ export class CustomEmitter<TMessage, TError> extends MultiEventEmitterBase<{
   'error': TError,
 }> {
   emitMessage(message: TMessage): void {
-    this.emitEvent('message', data);
+    this.emitEvent('message', message);
   }
   emitError(error: TError): void {
     this.emitEvent('error', error);
