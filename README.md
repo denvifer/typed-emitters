@@ -32,11 +32,13 @@ npm install typed-emitters
 
 ```typescript
 import { EventEmitter } from 'typed-emitters';
-
+```
+```typescript
 private emitter = new EventEmitter<string>();
 // Share the public interface
 public event = this.emitter.publicInterface;
-
+```
+```typescript
 this.emitter.emit('Test string'); // Type checking
 ```
 
@@ -55,11 +57,13 @@ event.addListener(data => { console.log(data); });
 
 ```typescript
 import { MultiEventEmitter } from 'typed-emitters';
-
+```
+```typescript
 private emitter = new MultiEventEmitter<{ 'type1': string, 'type2' number }>();
 // Share the public interface
 public events = this.emitter.publicInterface;
-
+```
+```typescript
 this.emitter.emit('type1', 'Test string'); // Type checking
 this.emitter.emit('type2', 1); // Type checking
 ```
