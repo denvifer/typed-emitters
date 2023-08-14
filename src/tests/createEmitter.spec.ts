@@ -49,4 +49,15 @@ describe(createEmitter.name, () => {
         emitter.removeAllListeners();
         expect(emitter.hasListeners()).toEqual(false);
     });
+
+    test("doesn't add duplicated listeners", () => {
+        const listener = jest.fn();
+
+        emitter.addListener(listener);
+        emitter.addListener(listener);
+
+        emitter.emit("test", 1);
+
+        expect(listener).toBeCalledTimes(1);
+    });
 });

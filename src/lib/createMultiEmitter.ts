@@ -3,7 +3,7 @@ import { removeFromArray } from "./utils/removeFromArray";
 type Listeners<
     ArgsByEventName extends Record<string | number, Array<unknown>>
 > = {
-    [EventName in keyof ArgsByEventName]: Array<
+    [EventName in keyof ArgsByEventName]: Set<
         (...args: ArgsByEventName[EventName]) => void
     >;
 };
@@ -18,7 +18,7 @@ export const createMultiEmitter = <
         listener: (...args: ArgsByEventName[EventName]) => void
     ): void => {
         if (eventName in listeners) {
-            removeFromArray(listeners[eventName], listener);
+            listeners[eventName].delete(listener);
         }
     };
 
@@ -27,9 +27,9 @@ export const createMultiEmitter = <
         listener: (...args: ArgsByEventName[EventName]) => void
     ): (() => void) => {
         if (!(eventName in listeners)) {
-            listeners[eventName] = [];
+            listeners[eventName] = new Set();
         }
-        listeners[eventName].push(listener);
+        listeners[eventName].add(listener);
         return () => {
             removeListener(eventName, listener);
         };
@@ -37,7 +37,7 @@ export const createMultiEmitter = <
 
     const hasListeners = <EventName extends keyof ArgsByEventName>(
         eventName: EventName
-    ) => !!(eventName in listeners && listeners[eventName].length);
+    ) => !!(eventName in listeners && listeners[eventName].size);
 
     const emit = <EventName extends keyof ArgsByEventName>(
         eventName: EventName,
@@ -54,7 +54,7 @@ export const createMultiEmitter = <
         eventName?: EventName
     ) => {
         if (eventName !== undefined) {
-            listeners[eventName] = [];
+            listeners[eventName].clear();
         } else {
             listeners = {} as Listeners<ArgsByEventName>;
         }

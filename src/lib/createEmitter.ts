@@ -1,20 +1,18 @@
-import { removeFromArray } from "./utils/removeFromArray";
-
 export const createEmitter = <Args extends Array<unknown>>() => {
-    let listeners = new Array<(...args: Args) => void>();
+    const listeners = new Set<(...args: Args) => void>();
 
     const removeListener = (listener: (...args: Args) => void): void => {
-        removeFromArray(listeners, listener);
+        listeners.delete(listener);
     };
 
     const addListener = (listener: (...args: Args) => void): (() => void) => {
-        listeners.push(listener);
+        listeners.add(listener);
         return () => {
             removeListener(listener);
         };
     };
 
-    const hasListeners = () => !!listeners.length;
+    const hasListeners = () => !!listeners.size;
 
     const emit = (...args: Args) => {
         listeners.forEach((listener) => {
@@ -23,7 +21,7 @@ export const createEmitter = <Args extends Array<unknown>>() => {
     };
 
     const removeAllListeners = () => {
-        listeners = [];
+        listeners.clear();
     };
 
     return {

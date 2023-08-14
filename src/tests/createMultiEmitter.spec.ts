@@ -72,4 +72,15 @@ describe(createMultiEmitter.name, () => {
         expect(emitter.hasListeners("event1")).toEqual(false);
         expect(emitter.hasListeners("event2")).toEqual(true);
     });
+
+    test("doesn't add duplicated listeners", () => {
+        const listener = jest.fn();
+
+        emitter.addListener("event1", listener);
+        emitter.addListener("event1", listener);
+
+        emitter.emit("event1", "test", 1);
+
+        expect(listener).toBeCalledTimes(1);
+    });
 });
