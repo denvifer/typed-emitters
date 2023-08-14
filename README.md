@@ -32,11 +32,13 @@ import { createEmitter } from "typed-emitters";
 ```
 
 ```typescript
-const /* Or private class field */ emitter =
-        createEmitter<[string, number] /* Multiple args are supported */>();
+const emitter = // Or private class field
+    createEmitter<
+        [string, number] // Multiple args are supported
+    >();
 
 // Share the public interface
-export const /* Or public class field */ event = this.emitter.publicInterface;
+export const event = this.emitter.publicInterface; // Or public class field
 ```
 
 ```typescript
@@ -63,10 +65,11 @@ import { createMultiEmitter } from "typed-emitters";
 ```
 
 ```typescript
-const /* Or private class field */ emitter = createMultiEmitter<{ 'type1': [number], 'type2' [string, number] }>();
+const emitter = // Or private class field
+    createMultiEmitter<{ 'type1': [number], 'type2' [string, number] }>();
 
 // Share the public interface
-export const /* Or public class field */ events = this.emitter.publicInterface;
+export const events = this.emitter.publicInterface; // Or public class field
 ```
 
 ```typescript
