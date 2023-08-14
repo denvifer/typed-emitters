@@ -56,4 +56,20 @@ describe(createMultiEmitter.name, () => {
         emitter.publicInterface.removeListener("event1", listener);
         expect(emitter.hasListeners("event1")).toEqual(false);
     });
+
+    test("removes all listeners", () => {
+        emitter.addListener("event1", jest.fn());
+        emitter.addListener("event2", jest.fn());
+        emitter.removeAllListeners();
+        expect(emitter.hasListeners("event1")).toEqual(false);
+        expect(emitter.hasListeners("event2")).toEqual(false);
+    });
+
+    test("removes all listeners for a specific eventName", () => {
+        emitter.addListener("event1", jest.fn());
+        emitter.addListener("event2", jest.fn());
+        emitter.removeAllListeners("event1");
+        expect(emitter.hasListeners("event1")).toEqual(false);
+        expect(emitter.hasListeners("event2")).toEqual(true);
+    });
 });

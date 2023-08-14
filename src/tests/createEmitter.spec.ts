@@ -43,4 +43,10 @@ describe(createEmitter.name, () => {
         emitter.publicInterface.removeListener(listener);
         expect(emitter.hasListeners()).toEqual(false);
     });
+
+    test("removes all listeners", () => {
+        emitter.addListener(jest.fn());
+        emitter.removeAllListeners();
+        expect(emitter.hasListeners()).toEqual(false);
+    });
 });

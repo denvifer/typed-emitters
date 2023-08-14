@@ -105,3 +105,15 @@ const dispose = event.addListener((...args) => {
 });
 dispose();
 ```
+
+## Other
+
+### Removing all listeners (might be needed in tests)
+
+```typescript
+emitter.removeAllListeners("type1");
+```
+
+```typescript
+emitter.removeAllListeners();
+```

@@ -1,13 +1,17 @@
 import { removeFromArray } from "./utils/removeFromArray";
 
+type Listeners<
+    ArgsByEventName extends Record<string | number, Array<unknown>>
+> = {
+    [EventName in keyof ArgsByEventName]: Array<
+        (...args: ArgsByEventName[EventName]) => void
+    >;
+};
+
 export const createMultiEmitter = <
     ArgsByEventName extends Record<string | number, Array<unknown>>
 >() => {
-    const listeners = {} as {
-        [EventName in keyof ArgsByEventName]: Array<
-            (...args: ArgsByEventName[EventName]) => void
-        >;
-    };
+    let listeners = {} as Listeners<ArgsByEventName>;
 
     const removeListener = <EventName extends keyof ArgsByEventName>(
         eventName: EventName,
@@ -46,11 +50,22 @@ export const createMultiEmitter = <
         }
     };
 
+    const removeAllListeners = <EventName extends keyof ArgsByEventName>(
+        eventName?: EventName
+    ) => {
+        if (eventName !== undefined) {
+            listeners[eventName] = [];
+        } else {
+            listeners = {} as Listeners<ArgsByEventName>;
+        }
+    };
+
     return {
         addListener,
         removeListener,
         hasListeners,
         emit,
+        removeAllListeners,
         get publicInterface() {
             return {
                 addListener,

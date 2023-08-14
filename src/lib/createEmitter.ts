@@ -1,7 +1,7 @@
 import { removeFromArray } from "./utils/removeFromArray";
 
 export const createEmitter = <Args extends Array<unknown>>() => {
-    const listeners = new Array<(...args: Args) => void>();
+    let listeners = new Array<(...args: Args) => void>();
 
     const removeListener = (listener: (...args: Args) => void): void => {
         removeFromArray(listeners, listener);
@@ -22,11 +22,16 @@ export const createEmitter = <Args extends Array<unknown>>() => {
         });
     };
 
+    const removeAllListeners = () => {
+        listeners = [];
+    };
+
     return {
         addListener,
         removeListener,
         hasListeners,
         emit,
+        removeAllListeners,
         get publicInterface() {
             return {
                 addListener,
