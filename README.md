@@ -28,17 +28,17 @@ npm install typed-emitters
 ### Provider
 
 ```typescript
-import { createEmitter } from "typed-emitters";
+import { createSingleEventEmitter } from "typed-emitters";
 ```
 
 ```typescript
 const emitter = // Or private class field
-    createEmitter<
+    createSingleEventEmitter<
         [string, number] // Multiple args are supported
     >();
 
 // Share the public interface
-export const event = this.emitter.publicInterface; // Or public class field
+export const event = this.emitter.source; // Or public class field
 ```
 
 ```typescript
@@ -61,20 +61,23 @@ event.addListener((...args) => {
 ### Provider
 
 ```typescript
-import { createMultiEmitter } from "typed-emitters";
+import { createMultiEventEmitter } from "typed-emitters";
 ```
 
 ```typescript
 const emitter = // Or private class field
-    createMultiEmitter<{ 'type1': [number], 'type2' [string, number] }>();
+    createMultiEventEmitter<{
+        'type1': [number],
+        'type2' [string, number]
+    }>();
 
 // Share the public interface
-export const events = this.emitter.publicInterface; // Or public class field
+export const events = this.emitter.source; // Or public class field
 ```
 
 ```typescript
-this.emitter.emit("type1", 1); // Type checking
-this.emitter.emit("type2", "Test string", 1); // Type checking
+emitter.emit("type1", 1); // Type checking
+emitter.emit("type2", "Test string", 1); // Type checking
 ```
 
 ### Consumer
@@ -108,12 +111,29 @@ dispose();
 
 ## Other
 
-### Removing all listeners (might be needed in tests)
+### Check if an emitter has listeners
+
+```typescript
+emitter.hasListeners();
+```
+
+```typescript
+emitter.hasListeners("type1");
+```
+
+### Removing all listeners
+
+```typescript
+emitter.removeAllListeners();
+```
 
 ```typescript
 emitter.removeAllListeners("type1");
 ```
 
-```typescript
-emitter.removeAllListeners();
-```
+### Exported types
+
+-   `SingleEventEmitter<Args>`
+-   `SingleEventSource<Args>`
+-   `MultiEventEmitter<ArgsByEventName>`
+-   `MultiEventSource<ArgsByEventName>`

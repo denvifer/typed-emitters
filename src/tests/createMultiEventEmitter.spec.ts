@@ -1,27 +1,27 @@
 import {
-    createMultiEmitter,
-    MultiEmitterInterface,
-} from "../lib/createMultiEmitter";
+    createMultiEventEmitter,
+    MultiEventEmitter,
+} from "../lib/createMultiEventEmitter";
 
-describe(createMultiEmitter.name, () => {
-    let emitter: MultiEmitterInterface<{
+describe(createMultiEventEmitter.name, () => {
+    let emitter: MultiEventEmitter<{
         event1: [string, number];
         event2: [number, string];
     }>;
 
     beforeEach(() => {
-        emitter = createMultiEmitter();
+        emitter = createMultiEventEmitter();
     });
 
     test("hasListeners returns false if there are no listeners", () => {
-        expect(emitter.hasListeners("event1")).toEqual(false);
-        expect(emitter.hasListeners("event2")).toEqual(false);
+        expect(emitter.hasListeners("event1")).toBeFalsy();
+        expect(emitter.hasListeners("event2")).toBeFalsy();
     });
 
     test("hasListeners returns true for the right eventName after adding a listener", () => {
         emitter.addListener("event1", jest.fn());
-        expect(emitter.hasListeners("event1")).toEqual(true);
-        expect(emitter.hasListeners("event2")).toEqual(false);
+        expect(emitter.hasListeners("event1")).toBeTruthy();
+        expect(emitter.hasListeners("event2")).toBeFalsy();
     });
 
     test("hasListeners returns false after removing a listener", () => {
@@ -29,8 +29,16 @@ describe(createMultiEmitter.name, () => {
         emitter.addListener("event1", listener);
         emitter.removeListener("event1", listener);
 
-        expect(emitter.hasListeners("event1")).toEqual(false);
-        expect(emitter.hasListeners("event2")).toEqual(false);
+        expect(emitter.hasListeners("event1")).toBeFalsy();
+        expect(emitter.hasListeners("event2")).toBeFalsy();
+    });
+
+    test("hasListeners method works correctly when eventName is not specified", () => {
+        const listener = jest.fn();
+        emitter.addListener("event1", listener);
+        expect(emitter.hasListeners()).toBeTruthy();
+        emitter.removeAllListeners();
+        expect(emitter.hasListeners()).toBeFalsy();
     });
 
     test("calls the right listener with right args", () => {
@@ -47,30 +55,30 @@ describe(createMultiEmitter.name, () => {
         expect(listener2).not.toBeCalled();
     });
 
-    test("publicInterface works correctly", () => {
+    test("source works correctly", () => {
         const listener = jest.fn();
 
-        emitter.publicInterface.addListener("event1", listener);
-        expect(emitter.hasListeners("event1")).toEqual(true);
+        emitter.source.addListener("event1", listener);
+        expect(emitter.hasListeners("event1")).toBeTruthy();
 
-        emitter.publicInterface.removeListener("event1", listener);
-        expect(emitter.hasListeners("event1")).toEqual(false);
+        emitter.source.removeListener("event1", listener);
+        expect(emitter.hasListeners("event1")).toBeFalsy();
     });
 
     test("removes all listeners", () => {
         emitter.addListener("event1", jest.fn());
         emitter.addListener("event2", jest.fn());
         emitter.removeAllListeners();
-        expect(emitter.hasListeners("event1")).toEqual(false);
-        expect(emitter.hasListeners("event2")).toEqual(false);
+        expect(emitter.hasListeners("event1")).toBeFalsy();
+        expect(emitter.hasListeners("event2")).toBeFalsy();
     });
 
     test("removes all listeners for a specific eventName", () => {
         emitter.addListener("event1", jest.fn());
         emitter.addListener("event2", jest.fn());
         emitter.removeAllListeners("event1");
-        expect(emitter.hasListeners("event1")).toEqual(false);
-        expect(emitter.hasListeners("event2")).toEqual(true);
+        expect(emitter.hasListeners("event1")).toBeFalsy();
+        expect(emitter.hasListeners("event2")).toBeTruthy();
     });
 
     test("doesn't add duplicated listeners", () => {

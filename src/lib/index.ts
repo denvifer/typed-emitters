@@ -1,8 +1,11 @@
-export { createEmitter } from "./createEmitter";
-export { createMultiEmitter } from "./createMultiEmitter";
+export { createSingleEventEmitter } from "./createSingleEventEmitter";
+export { createMultiEventEmitter } from "./createMultiEventEmitter";
 
-export type { EmitterInterface, EventInterface } from "./createEmitter";
 export type {
-    MultiEmitterInterface,
-    MultiEventInterface,
-} from "./createMultiEmitter";
+    SingleEventEmitter,
+    SingleEventSource,
+} from "./createSingleEventEmitter";
+export type {
+    MultiEventEmitter,
+    MultiEventSource,
+} from "./createMultiEventEmitter";

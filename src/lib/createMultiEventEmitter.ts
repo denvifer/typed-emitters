@@ -1,15 +1,11 @@
-import { removeFromArray } from "./utils/removeFromArray";
-
-type Listeners<
-    ArgsByEventName extends Record<string | number, Array<unknown>>
-> = {
+type Listeners<ArgsByEventName extends Record<string | number, unknown[]>> = {
     [EventName in keyof ArgsByEventName]: Set<
         (...args: ArgsByEventName[EventName]) => void
     >;
 };
 
-export const createMultiEmitter = <
-    ArgsByEventName extends Record<string | number, Array<unknown>>
+export const createMultiEventEmitter = <
+    ArgsByEventName extends Record<string | number, unknown[]>
 >() => {
     let listeners = {} as Listeners<ArgsByEventName>;
 
@@ -36,8 +32,16 @@ export const createMultiEmitter = <
     };
 
     const hasListeners = <EventName extends keyof ArgsByEventName>(
-        eventName: EventName
-    ) => !!(eventName in listeners && listeners[eventName].size);
+        eventName?: EventName
+    ) => {
+        if (eventName !== undefined) {
+            return !!(eventName in listeners && listeners[eventName].size);
+        } else {
+            return Object.values(listeners).some(
+                (listeners) => !!listeners.size
+            );
+        }
+    };
 
     const emit = <EventName extends keyof ArgsByEventName>(
         eventName: EventName,
@@ -66,7 +70,7 @@ export const createMultiEmitter = <
         hasListeners,
         emit,
         removeAllListeners,
-        get publicInterface() {
+        get source() {
             return {
                 addListener,
                 removeListener,
@@ -75,10 +79,10 @@ export const createMultiEmitter = <
     };
 };
 
-export type MultiEmitterInterface<
+export type MultiEventEmitter<
     ArgsByEventName extends Record<string | number, Array<unknown>>
-> = ReturnType<typeof createMultiEmitter<ArgsByEventName>>;
+> = ReturnType<typeof createMultiEventEmitter<ArgsByEventName>>;
 
-export type MultiEventInterface<
+export type MultiEventSource<
     ArgsByEventName extends Record<string | number, Array<unknown>>
-> = ReturnType<typeof createMultiEmitter<ArgsByEventName>>["publicInterface"];
+> = ReturnType<typeof createMultiEventEmitter<ArgsByEventName>>["source"];

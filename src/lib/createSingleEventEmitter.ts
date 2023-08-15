@@ -1,4 +1,4 @@
-export const createEmitter = <Args extends Array<unknown>>() => {
+export const createSingleEventEmitter = <Args extends unknown[] = []>() => {
     const listeners = new Set<(...args: Args) => void>();
 
     const removeListener = (listener: (...args: Args) => void): void => {
@@ -30,7 +30,7 @@ export const createEmitter = <Args extends Array<unknown>>() => {
         hasListeners,
         emit,
         removeAllListeners,
-        get publicInterface() {
+        get source() {
             return {
                 addListener,
                 removeListener,
@@ -39,10 +39,10 @@ export const createEmitter = <Args extends Array<unknown>>() => {
     };
 };
 
-export type EmitterInterface<Args extends Array<unknown>> = ReturnType<
-    typeof createEmitter<Args>
+export type SingleEventEmitter<Args extends Array<unknown>> = ReturnType<
+    typeof createSingleEventEmitter<Args>
 >;
 
-export type EventInterface<Args extends Array<unknown>> = ReturnType<
-    typeof createEmitter<Args>
->["publicInterface"];
+export type SingleEventSource<Args extends Array<unknown>> = ReturnType<
+    typeof createSingleEventEmitter<Args>
+>["source"];
